@@ -1,2 +1,2 @@
 # AgriLuLlama
-An generative agent based framework for simulating agricultural land use change using Llama 3.1-8B 
+An generative agent based framework for ecological intensification and agricultural land use change using finetuned Llama 3.1 
