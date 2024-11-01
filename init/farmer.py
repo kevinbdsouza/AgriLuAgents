@@ -3,9 +3,6 @@ from compute import Compute
 from in_context_learn import InContextLearner
 from prompts import FarmerPrompts
 
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
-
-
 class FarmerAgent:
     def __init__(self, farm_details, traits, goals, government_policies,
                  market_info, news, year, sim_year, hf_pipeline):
