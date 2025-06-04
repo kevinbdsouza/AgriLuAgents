@@ -2,7 +2,7 @@
 
 # Gemini API Settings
 gemini:
-  api_key: "AIzaSyDqfqETtZ2HVVcZ9U8tQNB2aQ8WZmo2AkM" 
+  api_key: "" 
   model_name: "gemini-1.5-flash" 
   max_tokens: 1500
   temperature: 0.7
