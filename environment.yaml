@@ -1,0 +1,48 @@
+name: agri-lu-agents # Choose a name for your conda environment
+channels:
+  - conda-forge # Primary channel for geospatial and many other packages
+  - defaults # Default conda channel
+dependencies:
+  # --- Core Python ---
+  - python=3.9 # Keep base Python version specified
+  - pip
+
+  # --- Core Libraries (conda will resolve versions) ---
+  - pyyaml
+  - numpy
+  - pyomo
+  - scipy
+  - geopandas
+  - xarray
+  - pandas
+  - netcdf4
+  - shapely
+  - matplotlib
+  - rasterio
+  - pyproj
+  # - pyogrio # Often included with geopandas
+  - scikit-image
+  - pillow
+  - imageio
+  # - basemap # Often tricky
+  - networkx
+  - tqdm
+  - ipopt # Added IPOPT solver as a conda dependency
+
+  # --- Pip dependencies (for packages not readily on conda or specific versions) ---
+  - pip:
+    - google-generativeai # Removed version pin
+    # - tifffile # Often included
+    # - basemap-data # Related to basemap
+
+# --- Solver Note ---
+# IPOPT solver is listed as a conda dependency above.
+# Conda will attempt to install it from the specified channels.
+# Ensure the installation completes successfully.
+
+# --- Solver Installation Note ---
+# IMPORTANT: Pyomo requires a separate solver executable like IPOPT.
+# Conda does *not* typically install the solver itself via this file.
+# You still need to install it separately, e.g.:
+# conda install -c conda-forge ipopt
+# OR follow OS-specific instructions (brew, apt-get, etc.) 

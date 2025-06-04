@@ -1,0 +1,206 @@
+# Configuration for AgriLuAgents Simulation
+
+# Gemini API Settings
+gemini:
+  api_key: "AIzaSyDqfqETtZ2HVVcZ9U8tQNB2aQ8WZmo2AkM" 
+  model_name: "gemini-1.5-flash" 
+  max_tokens: 1500
+  temperature: 0.7
+  top_p: 1.0
+
+# Simulation Parameters
+simulation:
+  num_years: 10 
+  base_year: 2025 
+
+economic_params:
+  interest_rate: 4
+  inflation_rate: 0.02
+
+# Environment Parameters
+environment:
+  base_market_prices:
+    corn: 157.47     # $/tonne 
+    soybeans: 385.81 # $/tonne
+    wheat: 227.81    # $/tonne
+    oat: 241.12      # $/tonne 
+  market_price_volatility: 0.15 # Standard deviation of % price change factor per year
+  
+  base_precipitation_range: [520, 560] # Example range in mm
+  base_temperature_range: [10, 30]    # Example range in degrees C
+  precipitation_variability: 100 # Std dev in mm
+  temperature_variability: 4     # Std dev in degrees C
+  
+  # SSP 3 pathway parameters
+  ssp3_precipitation_trend: 0.01   # % change per year (1% increase)
+  ssp3_temperature_trend: 0.03     # °C change per year (0.03°C increase)
+  
+  # Add base prices for non-crop outputs
+  base_carbon_price: 50       # $/tonne CO2e
+  carbon_price_volatility: 0.10
+  base_timber_price: 70       # $/cubic meter
+  timber_price_volatility: 0.12
+
+# Crop Specific Data
+crops_data:
+  # List of crops simulated (must match keys below)
+  crop_list: ['corn', 'soy', 'wheat', 'oat']
+  other_lus: ['afforestation', 'rewilding']
+  # Per-crop parameters
+  corn:
+    base_yield: 11.30     # tonnes/hectare
+    base_cost: 864.87     # $/hectare (variable + fixed costs)
+    optimal_precipitation: 600 # mm
+    yield_sensitivity_to_precipitation: 0.0015 # % yield change per mm deviation from optimal
+    optimal_temperature: 22.0 # °C
+    yield_sensitivity_to_temperature: 0.02 # % yield change per °C deviation from optimal
+  soy:
+    base_yield: 4.03      # tonnes/hectare
+    base_cost: 617.76     # $/hectare
+    optimal_precipitation: 550 # mm
+    yield_sensitivity_to_precipitation: 0.0010
+    optimal_temperature: 24.0 # °C
+    yield_sensitivity_to_temperature: 0.025 # % yield change per °C deviation from optimal
+  wheat:
+    base_yield: 4.70      # tonnes/hectare
+    base_cost: 494.21     # $/hectare
+    optimal_precipitation: 450 # mm
+    yield_sensitivity_to_precipitation: 0.0018
+    optimal_temperature: 18.0 # °C
+    yield_sensitivity_to_temperature: 0.03 # % yield change per °C deviation from optimal
+  oat:
+    base_yield: 3.58      # tonnes/hectare
+    base_cost: 444.79     # $/hectare
+    optimal_precipitation: 480 # mm
+    yield_sensitivity_to_precipitation: 0.0016
+    optimal_temperature: 16.0 # °C
+    yield_sensitivity_to_temperature: 0.015 # % yield change per °C deviation from optimal
+
+# Afforestation Specific Data
+afforestation_data:
+  base_carbon_sequestration: 8.0  # tonnes CO2e / hectare / year (average)
+  base_timber_yield: 2.5          # cubic meters / hectare / year (average after maturity)
+  timber_maturity_years: 40       # years
+  establishment_cost: 1200        # $/hectare (one-time)
+  maintenance_cost: 50            # $/hectare / year
+  harvest_cost: 15                # $/cubic meter
+
+# Rewilding Specific Data
+rewilding_data:
+  base_carbon_sequestration: 4.0  # tonnes CO2e / hectare / year (average)
+  establishment_cost: 100         # $/hectare (one-time, minimal)
+  maintenance_cost: 10            # $/hectare / year (minimal monitoring)
+
+government_policies:
+    - carbon credits for carbon dioxide sequestration
+    - credits for creating ecological connectivity
+    - credits for preserving food security
+    - partial upfront grant for afforestation
+    - tax for carbon emissions from land use
+    - small grants for improving land quality
+    
+# Data Paths (adjust as needed)
+paths:
+  data_dir: "data/" 
+  output_dir: "output/"
+  prompt_file: "src/prompts.py" 
+  solver_path: "/Users/kevindsouza/anaconda3/envs/agri-lu-agents/bin/ipopt"
+
+# Land Manager Properties Configuration
+lm_props:
+  land_quality:
+    poor:
+      - adverse climate
+      - undesirable soils structure
+      - low permeability
+      - erosion
+      - low fertility
+      - inundation by streams or lakes
+      - moisture limitation
+      - salinity issues
+      - stoniness issues
+      - consolidated bedrock limited
+      - topography limited
+      - excess water
+    satisfactory:
+      - minor characteristics
+      - unclassified
+      - combination of subclasses
+    good: "no limitations"
+
+  traits:
+    self:
+      - self-serving
+      - altruistic
+    moral:
+      - conscientious
+      - unprincipled
+    empathy:
+      - empathetic
+      - apathetic
+    open:
+      - [adventurous, risk-taker, open-minded]
+      - [change-averse]
+    group:
+      - family oriented
+      - individualistic
+      - community minded
+    politics:
+      - conservative
+      - liberal
+    env:
+      - [nature lover, strong environmentalist, sustainability champion]
+      - [nature neutral person, climate change denier]
+    school:
+      - traditional
+      - modern
+    tech:
+      - technology averse
+      - technology adopter
+    adoption:
+      - early adopter
+      - trend follower
+    firmness:
+      - firm
+      - easily swayed
+    public:
+      - care about public opinion
+      - do not care about public opinion
+    incentives:
+      - use government incentives
+      - do not use government incentives
+    future:
+      - prepare for the future
+      - do not prepare for the future
+    market:
+      - keep tabs on the market
+      - do not keep tabs on the market
+
+  goals:
+    - [maximize profit, minimize cost]
+    - [act sustainably, preserve environment]
+    - [take care of family, explore new avenues]
+
+  managerial_ability:
+    - poor
+    - satisfactory
+    - good
+    - very good
+    - excellent
+
+  province:
+    - Ontario
+    - Quebec
+    - Alberta
+    - British Columbia
+    - Manitoba
+    - Saskatchewan
+
+  manager_age_range:
+    start: 23
+    end: 76
+
+  liquid_capital_range:
+    start: 100000
+    end: 1000000
+    step: 100000 
