@@ -1,2 +1,2 @@
 # AgriLuLlama
-An generative agent based framework for ecological intensification and agricultural land use change using finetuned Llama 3.1 
+A generative agent based framework for agricultural land use decision making using Gemini
